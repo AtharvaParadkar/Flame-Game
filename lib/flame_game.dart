@@ -35,8 +35,8 @@ class FlameGameExample extends FlameGame {
     );
     world.add(
       Player(
-        position: Vector2(gameHeight / 8, 0),
-        radius: gameHeight / 3.5,
+        position: Vector2(gameWidth / 4, 0),
+        radius: gameWidth / 4,
         color: Colors.greenAccent,
       ),
     );
