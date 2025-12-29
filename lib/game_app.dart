@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flame_game/constants.dart';
-import 'package:flame_game/flame_game.dart';
+import 'package:flame_game/game/flame_game.dart';
 import 'package:flutter/material.dart';
 
 class GameApp extends StatefulWidget {
