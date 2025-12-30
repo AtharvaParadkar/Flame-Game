@@ -1,16 +1,19 @@
 import 'dart:async';
 
 import 'package:flame/camera.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game_world.dart';
 import 'package:flame_game/player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class FlameGameExample extends FlameGame {
+class FlameGameExample extends FlameGame<FlameGameWorld>
+    with HorizontalDragDetector, KeyboardEvents {
   FlameGameExample()
     : super(
-    world: FlameGameWorld(),
+        world: FlameGameWorld(),
         camera: CameraComponent.withFixedResolution(
           width: gameWidth,
           height: gameHeight,
@@ -20,6 +23,33 @@ class FlameGameExample extends FlameGame {
   @override
   Color backgroundColor() {
     return Color.fromARGB(255, 0, 0, 30);
+  }
+
+  @override
+  void onHorizontalDragUpdate(DragUpdateInfo info) {
+    super.onHorizontalDragUpdate(info);
+    world.player.move(info.delta.global.x);
+  }
+
+  @override
+  KeyEventResult onKeyEvent(
+    KeyEvent event,
+    Set<LogicalKeyboardKey> keysPressed,
+  ) {
+    const double speed = 55.0;
+
+    if (event is KeyDownEvent) {
+      if (keysPressed.contains(LogicalKeyboardKey.arrowRight) ||
+          keysPressed.contains(LogicalKeyboardKey.keyD)) {
+        world.player.move(speed);
+        return KeyEventResult.handled;
+      } else if (keysPressed.contains(LogicalKeyboardKey.arrowLeft) ||
+          keysPressed.contains(LogicalKeyboardKey.keyA)) {
+        world.player.move(-speed);
+        return KeyEventResult.handled;
+      }
+    }
+    return KeyEventResult.ignored;
   }
 
   // @override

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flame/components.dart';
 import 'package:flame_game/constants.dart';
@@ -27,6 +28,15 @@ class Player extends SpriteComponent {
     }
 
     position.y = newY;
+  }
+
+  void move(double deltaX) {
+    double newX = position.x + deltaX;
+    // to not go outside of the screen
+    double minX = -(gameWidth / 2) + size.x / 2;
+    double maxX = (gameWidth / 2) - size.x / 2;
+    newX = newX.clamp(minX, maxX);
+    position.x = newX;
   }
 }
 
