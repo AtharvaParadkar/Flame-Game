@@ -5,12 +5,12 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game_world.dart';
-import 'package:flame_game/player.dart';
+import 'package:flame_game/game/sprites/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FlameGameExample extends FlameGame<FlameGameWorld>
-    with HorizontalDragDetector, KeyboardEvents {
+    with HorizontalDragDetector, KeyboardEvents, HasCollisionDetection {
   FlameGameExample()
     : super(
         world: FlameGameWorld(),
@@ -23,6 +23,12 @@ class FlameGameExample extends FlameGame<FlameGameWorld>
   @override
   Color backgroundColor() {
     return Color.fromARGB(255, 0, 0, 30);
+  }
+
+  @override
+  FutureOr<void> onLoad() {
+    super.onLoad();
+    debugMode = true;
   }
 
   @override

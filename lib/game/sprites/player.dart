@@ -1,18 +1,20 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game.dart';
 import 'package:flutter/material.dart';
 
-class Player extends SpriteComponent {
+class Player extends SpriteComponent with HasGameReference<FlameGameExample>{
   @override
   FutureOr<void> onLoad() async {
     sprite = await Sprite.load("sprite.png");
     size = Vector2.all(100);
     position = Vector2(0, -(gameHeight / 2) + (size.y / 2));
     anchor = Anchor.center;
+    add(RectangleHitbox());
   }
 
   @override
