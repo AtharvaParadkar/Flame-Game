@@ -8,7 +8,7 @@ import 'package:flame_game/game/sprites/player.dart';
 class Bin extends SpriteComponent with HasGameReference<FlameGameExample> , CollisionCallbacks{
   @override
   FutureOr<void> onLoad() async{
-    sprite = await Sprite.load('recycle_bin.png');
+    sprite = await Sprite.load('bin_recycle.png');
     size = Vector2.all(300);
     position = Vector2(0, (game.size.y / 2) - (size.y /2));
     anchor = Anchor.center;

@@ -20,14 +20,14 @@ class Obstacles extends SpriteComponent with HasGameReference<FlameGameExample>,
   }
 }
 
-class Obstacle1 extends Obstacles {
-  Obstacle1({super.spritePath = 'obstacle.png'});
+class ObstacleTrash extends Obstacles {
+  ObstacleTrash({super.spritePath = 'trash.png'});
 }
 
-class Obstacle2 extends Obstacles {
-  Obstacle2({super.spritePath = 'obstacle.png'});
+class ObstacleWater extends Obstacles {
+  ObstacleWater({super.spritePath = 'water.png'});
 }
 
-class Obstacle3 extends Obstacles {
-  Obstacle3({super.spritePath = 'obstacle.png'});
+class ObstacleFire extends Obstacles {
+  ObstacleFire({super.spritePath = 'fire.png'});
 }
