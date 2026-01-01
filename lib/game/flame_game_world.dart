@@ -24,10 +24,10 @@ class FlameGameWorld extends World with HasGameReference<FlameGameExample> {
         obstacle = ObstacleWater()..position = data.position;
       } else if (data.type == ObstacleType.fire) {
         obstacle = ObstacleFire()..position = data.position;
-        // } else if (data.type == ObstacleType.binTrash) {
-        //   obstacle = BinTrash()..position = data.position;
-        // } else if (data.type == ObstacleType.binRecycle) {
-        //   obstacle = BinRecycle()..position = data.position;
+        } else if (data.type == ObstacleType.binTrash) {
+          obstacle = BinTrash()..position = data.position;
+        } else if (data.type == ObstacleType.binRecycle) {
+          obstacle = BinRecycle()..position = data.position;
       } else {
         continue;
       }
@@ -42,12 +42,11 @@ class FlameGameWorld extends World with HasGameReference<FlameGameExample> {
     /// The world is essentially the whole game
     player = Player();
     add(player);
-    add(Bin());
 
     // add(ObstacleTrash()..position = Vector2(0, 0));
     // add(ObstacleWater()..position = Vector2(-obstacleSize * 2, 0));
     // add(ObstacleFire()..position = Vector2(obstacleSize * 2, 0));
-    loadLevel(LevelData().level1());
+    loadLevel(LevelData().getLevel(4));
   }
 
   @override

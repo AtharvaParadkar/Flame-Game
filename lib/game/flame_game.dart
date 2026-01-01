@@ -28,7 +28,7 @@ class FlameGameExample extends FlameGame<FlameGameWorld>
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
-    debugMode = false;
+    debugMode = true;
   }
 
   @override
