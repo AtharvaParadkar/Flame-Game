@@ -5,7 +5,6 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game_world.dart';
-import 'package:flame_game/game/sprites/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,7 +21,7 @@ class FlameGameExample extends FlameGame<FlameGameWorld>
 
   @override
   Color backgroundColor() {
-    return Color.fromARGB(255, 0, 0, 30);
+    return Color(0xFFF4F1F8); // lavender
   }
 
   @override

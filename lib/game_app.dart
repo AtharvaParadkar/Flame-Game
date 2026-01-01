@@ -24,7 +24,7 @@ class _GameAppState extends State<GameApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 60),
+        backgroundColor: Color(0xFFF4F1F8), //lavender
         body: SafeArea(
           child: Center(
             child: FittedBox(
