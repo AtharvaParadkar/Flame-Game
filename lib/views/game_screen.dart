@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flame/game.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game.dart';
+import 'package:flame_game/game_end_state.dart';
+import 'package:flame_game/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -16,7 +21,12 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    game = FlameGameExample();
+    game = FlameGameExample(
+      onCallback: (GameEndState gameEndState) {
+        log("!@@@@@@@@@@@!!!!!!!!!!!!!!! $gameEndState");
+        context.goNamed(AppRoute.end.name,extra: gameEndState);
+      },
+    );
   }
 
   @override

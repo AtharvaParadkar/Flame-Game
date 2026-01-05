@@ -5,6 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flame_game/game/flame_game.dart';
 import 'package:flame_game/game/sprites/obstacles.dart';
 import 'package:flame_game/game/sprites/player.dart';
+import 'package:flame_game/game_end_state.dart';
 import 'package:flutter/material.dart';
 
 class Bin extends SpriteComponent
@@ -39,6 +40,7 @@ class BinTrash extends Obstacles {
     if (other is Player) {
       other.removeFromParent();
       // end state set
+      game.onCallback(GameEndState.trash);
     }
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -53,6 +55,7 @@ class BinRecycle extends Obstacles {
       other.removeFromParent();
       debugPrint("{{{{{{*}}}}}} Hit recycle bin");
       // win state set
+      game.onCallback(GameEndState.recycle);
     }
     super.onCollisionStart(intersectionPoints, other);
   }

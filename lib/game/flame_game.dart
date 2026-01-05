@@ -5,12 +5,13 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game_world.dart';
+import 'package:flame_game/game_end_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FlameGameExample extends FlameGame<FlameGameWorld>
     with HorizontalDragDetector, KeyboardEvents, HasCollisionDetection {
-  FlameGameExample()
+  FlameGameExample({required this.onCallback})
     : super(
         world: FlameGameWorld(),
         camera: CameraComponent.withFixedResolution(
@@ -18,6 +19,7 @@ class FlameGameExample extends FlameGame<FlameGameWorld>
           height: gameHeight,
         ),
       );
+  final void Function(GameEndState gameEndState) onCallback;
 
   @override
   Color backgroundColor() {
