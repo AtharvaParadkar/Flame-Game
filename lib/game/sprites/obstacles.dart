@@ -37,6 +37,7 @@ class ObstacleTrash extends Obstacles {
   ) {
     if (other is Player) {
       other.removeFromParent();
+      game.onCallback();
     }
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -52,6 +53,7 @@ class ObstacleWater extends Obstacles {
   ) {
     if (other is Player) {
       other.removeFromParent();
+      game.onCallback();
     }
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -67,6 +69,7 @@ class ObstacleFire extends Obstacles {
   ) {
     if (other is Player) {
       other.removeFromParent();
+      game.onCallback();
     }
     super.onCollisionStart(intersectionPoints, other);
   }

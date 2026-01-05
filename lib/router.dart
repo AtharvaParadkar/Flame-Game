@@ -1,9 +1,10 @@
 import 'package:flame_game/game/game_screen.dart';
+import 'package:flame_game/views/end_screen.dart';
 import 'package:flame_game/views/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-enum AppRoute { menu, game }
+enum AppRoute { menu, game, end }
 
 GoRouter goRouter() {
   return GoRouter(
@@ -24,6 +25,13 @@ GoRouter goRouter() {
             fullscreenDialog: true,
             child: GameScreen(),
           );
+        },
+      ),
+      GoRoute(
+        path: '/end',
+        name: AppRoute.end.name,
+        pageBuilder: (context, state) {
+          return const MaterialPage(fullscreenDialog: true, child: EndScreen());
         },
       ),
     ],
