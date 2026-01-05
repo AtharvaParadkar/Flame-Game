@@ -1,23 +1,32 @@
+import 'package:flame_game/local_data/hive_repository.dart';
 import 'package:flame_game/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class MenuScreen extends StatefulWidget {
+class MenuScreen extends ConsumerStatefulWidget {
   const MenuScreen({super.key});
 
   @override
-  State<MenuScreen> createState() => _MenuScreenState();
+  ConsumerState<MenuScreen> createState() => _MenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class _MenuScreenState extends ConsumerState<MenuScreen> {
   @override
   Widget build(BuildContext context) {
+  final gamePlayed= ref.read(hiveRepositoryProvider).getValue('totalAttempts');
     return Scaffold(
       appBar: AppBar(title: Text("Menu")),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => context.pushNamed(AppRoute.game.name),
-          child: Text('Start Game'),
+        child: Column(
+          mainAxisAlignment: .center,
+          children: [
+            Text('Games played: ${gamePlayed ?? 0}'),
+            ElevatedButton(
+              onPressed: () => context.pushNamed(AppRoute.game.name),
+              child: Text('Start Game'),
+            ),
+          ],
         ),
       ),
     );
