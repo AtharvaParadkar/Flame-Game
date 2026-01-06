@@ -27,7 +27,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       onCallback: (GameEndState gameEndState) {
 
         // save attempt
-        ref.read(hiveRepositoryProvider).savedAttempt();
+        ref.read(hiveRepositoryProvider).savedAttempt(gameEndState);
 
         log("!@@@@@@@@@@@!!!!!!!!!!!!!!! $gameEndState");
         context.goNamed(AppRoute.end.name,extra: gameEndState);

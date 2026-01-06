@@ -14,14 +14,19 @@ class MenuScreen extends ConsumerStatefulWidget {
 class _MenuScreenState extends ConsumerState<MenuScreen> {
   @override
   Widget build(BuildContext context) {
-  final gamePlayed= ref.read(hiveRepositoryProvider).getValue('totalAttempts');
+    // final gamePlayed= ref.read(hiveRepositoryProvider).getValue('totalAttempts');
+    final db = ref.read(hiveRepositoryProvider);
     return Scaffold(
       appBar: AppBar(title: Text("Menu")),
       body: Center(
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Text('Games played: ${gamePlayed ?? 0}'),
+            Text('Games played: ${db.getValue('totalAttempts') ?? 0}'),
+            Text("Trash: ${db.getValue("trashEndCount") ?? 0}"),
+            Text("Water: ${db.getValue("waterEndCount") ?? 0}"),
+            Text("Fire: ${db.getValue("fireEndCount") ?? 0}"),
+            Text("Recycle: ${db.getValue("recycleEndCount") ?? 0}"),
             ElevatedButton(
               onPressed: () => context.pushNamed(AppRoute.game.name),
               child: Text('Start Game'),
