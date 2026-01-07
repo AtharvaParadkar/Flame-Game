@@ -24,6 +24,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   void initState() {
     super.initState();
     game = FlameGameExample(
+      level: ref.read(hiveRepositoryProvider).setLevel(),
       onCallback: (GameEndState gameEndState) {
 
         // save attempt

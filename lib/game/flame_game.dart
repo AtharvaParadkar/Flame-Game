@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 
 class FlameGameExample extends FlameGame<FlameGameWorld>
     with HorizontalDragDetector, KeyboardEvents, HasCollisionDetection {
-  FlameGameExample({required this.onCallback})
+  FlameGameExample({required this.onCallback, required this.level})
     : super(
         world: FlameGameWorld(),
         camera: CameraComponent.withFixedResolution(
@@ -20,6 +20,7 @@ class FlameGameExample extends FlameGame<FlameGameWorld>
         ),
       );
   final void Function(GameEndState gameEndState) onCallback;
+  final int level;
 
   @override
   Color backgroundColor() {

@@ -23,6 +23,12 @@ class HiveRepository {
     box.put(endCounterKey, endCount + 1);
     log("Saved attempts - ${box.toMap()}");
   }
+
+  int setLevel() {
+    final recycleEnd = box.get("recycleEndCount", defaultValue: 0);
+    log("LEVEL: ${(recycleEnd + 1).clamp(1, 5)}");
+    return (recycleEnd + 1).clamp(1, 5);
+  }
 }
 
 @Riverpod(keepAlive: true)

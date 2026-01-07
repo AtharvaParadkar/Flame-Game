@@ -46,7 +46,8 @@ class FlameGameWorld extends World with HasGameReference<FlameGameExample> {
     // add(ObstacleTrash()..position = Vector2(0, 0));
     // add(ObstacleWater()..position = Vector2(-obstacleSize * 2, 0));
     // add(ObstacleFire()..position = Vector2(obstacleSize * 2, 0));
-    loadLevel(LevelData().getLevel(5));
+    // loadLevel(LevelData().getLevel(5));
+    loadLevel(LevelData().getLevel(game.level));
   }
 
   @override
