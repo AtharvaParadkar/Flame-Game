@@ -1,5 +1,6 @@
 import 'package:flame_game/local_data/hive_repository.dart';
 import 'package:flame_game/router.dart';
+import 'package:flame_game/widgets/reset_game_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +16,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     // final gamePlayed= ref.read(hiveRepositoryProvider).getValue('totalAttempts');
-    final db = ref.read(hiveRepositoryProvider);
+    final db = ref.watch(hiveRepositoryProvider);
     return Scaffold(
       appBar: AppBar(title: Text("Menu")),
       body: Center(
@@ -31,6 +32,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               onPressed: () => context.pushNamed(AppRoute.game.name),
               child: Text('Start Game'),
             ),
+            ResetGameWidget(),
           ],
         ),
       ),
