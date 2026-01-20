@@ -1,9 +1,10 @@
 import 'package:flame_game/local_data/hive_repository.dart';
 import 'package:flame_game/router.dart';
-import 'package:flame_game/widgets/reset_game_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../widgets/reset_game_widget.dart';
 
 class MenuScreen extends ConsumerStatefulWidget {
   const MenuScreen({super.key});
@@ -18,7 +19,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
     // final gamePlayed= ref.read(hiveRepositoryProvider).getValue('totalAttempts');
     final db = ref.watch(hiveRepositoryProvider);
     return Scaffold(
-      appBar: AppBar(title: Text("Menu")),
+      appBar: AppBar(automaticallyImplyLeading: false, title: Text("Menu")),
       body: Center(
         child: Column(
           mainAxisAlignment: .center,
