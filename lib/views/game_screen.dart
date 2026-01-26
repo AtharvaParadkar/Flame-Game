@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/flame_game.dart';
 import 'package:flame_game/game_end_state.dart';
@@ -23,14 +24,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   void initState() {
     super.initState();
+    if (ref.read(canPlaySoundProvider)) {
+      FlameAudio.bgm.initialize();
+      FlameAudio.bgm.play('bg_game.mp3', volume: 0.2);
+    }
     game = FlameGameExample(
       level: ref.read(hiveRepositoryProvider).setLevel(),
       onCallback: (GameEndState gameEndState) {
-
+        FlameAudio.bgm.stop();
+        // FlameAudio.bgm.play('bg_end.mp3',volume: 0.2);
         // save attempt
         ref.read(hiveRepositoryProvider).savedAttempt(gameEndState);
 
-        log("!@@@@@@@@@@@!!!!!!!!!!!!!!! $gameEndState");
         context.goNamed(AppRoute.end.name,extra: gameEndState);
       },
     );

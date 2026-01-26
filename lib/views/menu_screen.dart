@@ -1,5 +1,6 @@
 import 'package:flame_game/local_data/hive_repository.dart';
 import 'package:flame_game/router.dart';
+import 'package:flame_game/widgets/mute_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               child: Text('Start Game'),
             ),
             ResetGameWidget(),
+            MuteButtonWidget(currentAudio: "bg_win.mp3"),
           ],
         ),
       ),

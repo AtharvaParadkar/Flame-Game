@@ -2,17 +2,21 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flame/extensions.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SpinningWheelWidget extends StatefulWidget {
+import '../local_data/hive_repository.dart';
+
+class SpinningWheelWidget extends ConsumerStatefulWidget {
   const SpinningWheelWidget({super.key});
 
   @override
-  State<SpinningWheelWidget> createState() => _SpinningWheelWidgetState();
+  ConsumerState<SpinningWheelWidget> createState() => _SpinningWheelWidgetState();
 }
 
-class _SpinningWheelWidgetState extends State<SpinningWheelWidget> {
+class _SpinningWheelWidgetState extends ConsumerState<SpinningWheelWidget> {
   StreamController<int> selected = StreamController<int>();
 
   @override
@@ -30,6 +34,9 @@ class _SpinningWheelWidgetState extends State<SpinningWheelWidget> {
       elevation: 6,
       child: FortuneWheel(
         onFling: () {
+          if (ref.read(canPlaySoundProvider)) {
+            FlameAudio.play('spin.mp3');
+          }
           List<int> o = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
           setState(() {
             outCome = o[Random().nextInt(o.length)];

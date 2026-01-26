@@ -36,11 +36,14 @@ class _EndScreenState extends State<EndScreen> {
                   height: MediaQuery.of(context).size.width *0.9,
                   child: SpinningWheelWidget(),
                 ),
+              SizedBox(height: 10),
               Text("End State: ${widget.winLose == GameEndState.recycle ? 'Win' : 'Lose'}"),
+              SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () => context.pushNamed(AppRoute.game.name),
                 child: Text('Play Again'),
               ),
+              SizedBox(height: 10),
               TextButton(
                 onPressed: () => context.pushNamed(AppRoute.menu.name),
                 child: Text('Main Menu'),

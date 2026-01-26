@@ -49,3 +49,54 @@ final class HiveRepositoryProvider
 }
 
 String _$hiveRepositoryHash() => r'd3c0c996579f88c8994318d49832866617cbaa57';
+
+@ProviderFor(CanPlaySound)
+final canPlaySoundProvider = CanPlaySoundProvider._();
+
+final class CanPlaySoundProvider extends $NotifierProvider<CanPlaySound, bool> {
+  CanPlaySoundProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'canPlaySoundProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$canPlaySoundHash();
+
+  @$internal
+  @override
+  CanPlaySound create() => CanPlaySound();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$canPlaySoundHash() => r'c68a7d02c279b24b0880cb7d8bf0966a1d52d1e9';
+
+abstract class _$CanPlaySound extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

@@ -39,3 +39,15 @@ class HiveRepository {
 HiveRepository hiveRepository(Ref ref) {
   return HiveRepository();
 }
+
+@riverpod
+class CanPlaySound extends _$CanPlaySound {
+  @override
+  bool build() => Hive.box("gameDB").get("playSound", defaultValue: true);
+
+  void toggle() {
+    final canPlay = Hive.box("gameDB").get("playSound", defaultValue: true);
+    Hive.box("gameDB").put("playSound", !canPlay);
+    state = !canPlay;
+  }
+}
