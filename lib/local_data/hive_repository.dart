@@ -6,6 +6,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'hive_repository.g.dart';
 
+/// In Riverpod, 'dart run build_runner watch -d' continuously generates provider code from @riverpod annotations and safely cleans up outdated providers when your code changes.
+
 class HiveRepository {
   final box = Hive.box('gameDB');
 
