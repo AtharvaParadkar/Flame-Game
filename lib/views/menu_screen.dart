@@ -2,9 +2,11 @@ import 'package:flame_game/local_data/hive_repository.dart';
 import 'package:flame_game/router.dart';
 import 'package:flame_game/widgets/mute_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../theme_provider.dart';
 import '../widgets/reset_game_widget.dart';
 
 class MenuScreen extends ConsumerStatefulWidget {
@@ -23,7 +25,32 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text("Menu"),
-        actions: const [MuteButtonWidget(currentAudio: "bg_win.mp3")],
+        actions: [
+          Consumer(
+            builder: (context, ref, _) {
+              final mode = ref.watch(themeModeProvider);
+              return IconButton(
+                tooltip: "Switch theme",
+                icon: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  transitionBuilder: (child, anim) =>
+                      RotationTransition(turns: anim, child: child),
+                  child: Icon(
+                    mode == ThemeMode.dark
+                        ? Icons.dark_mode_rounded
+                        : Icons.light_mode_rounded,
+                    key: ValueKey(mode),
+                  ),
+                ),
+                onPressed: () {
+                  HapticFeedback.selectionClick();
+                  ref.read(themeModeProvider.notifier).toggle();
+                },
+              );
+            },
+          ),
+          const MuteButtonWidget(currentAudio: "bg_win.mp3"),
+        ],
       ),
       body: Padding(
         padding: const .all(20),

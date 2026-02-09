@@ -1,5 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flame_game/router.dart';
+import 'package:flame_game/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -16,20 +17,24 @@ void main() async {
   runApp(ProviderScope(child: GameApp()));
 }
 
-class GameApp extends StatefulWidget {
+class GameApp extends ConsumerStatefulWidget {
   const GameApp({super.key});
 
   @override
-  State<GameApp> createState() => _GameAppState();
+  ConsumerState<GameApp> createState() => _GameAppState();
 }
 
-class _GameAppState extends State<GameApp> {
+class _GameAppState extends ConsumerState<GameApp> {
   @override
   Widget build(BuildContext context) {
     final router = goRouter();
+    final themeMode = ref.watch(themeModeProvider);
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+      themeMode: themeMode,
+      theme: lightTheme,
+      darkTheme: darkTheme,
     );
   }
 }
