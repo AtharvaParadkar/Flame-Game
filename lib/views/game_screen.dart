@@ -8,6 +8,7 @@ import 'package:flame_game/game_end_state.dart';
 import 'package:flame_game/local_data/hive_repository.dart';
 import 'package:flame_game/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,7 +37,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         // save attempt
         ref.read(hiveRepositoryProvider).savedAttempt(gameEndState);
 
-        context.goNamed(AppRoute.end.name,extra: gameEndState);
+        context.goNamed(AppRoute.end.name, extra: gameEndState);
       },
     );
   }
@@ -45,13 +46,19 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF4F1F8), //lavender
-      body: SafeArea(
-        child: Center(
-          child: FittedBox(
-            child: SizedBox(
-              height: gameHeight,
-              width: gameWidth,
-              child: GameWidget(game: game),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: .light,
+        child: SafeArea(
+          child: Center(
+            child: FittedBox(
+              child: SizedBox(
+                height: gameHeight,
+                width: gameWidth,
+                child: ClipRRect(
+                  borderRadius: .circular(16),
+                  child: GameWidget(game: game),
+                ),
+              ),
             ),
           ),
         ),

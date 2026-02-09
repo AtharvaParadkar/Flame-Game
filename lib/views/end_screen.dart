@@ -37,11 +37,21 @@ class _EndScreenState extends State<EndScreen> {
                   child: SpinningWheelWidget(),
                 ),
               SizedBox(height: 10),
-              Text("End State: ${widget.winLose == GameEndState.recycle ? 'Win' : 'Lose'}"),
+              Text(
+                widget.winLose == GameEndState.recycle ? "YOU WIN 🎉" : "GAME OVER",
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               SizedBox(height: 10),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const .symmetric(horizontal: 32, vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: .circular(30)),
+                ),
                 onPressed: () => context.pushNamed(AppRoute.game.name),
-                child: Text('Play Again'),
+                child: const Text("Play Again"),
               ),
               SizedBox(height: 10),
               TextButton(

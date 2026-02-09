@@ -15,26 +15,28 @@ class ResetGameWidget extends ConsumerWidget {
           context: context,
           builder: (BuildContext ctx) {
             return AlertDialog(
-              title: Text("Reset The Game"),
-              insetPadding: .all(12),
-              content: Text(
-                "Are you sure? You will lose all progress and everything will be reset. This can't be undone.",
-                style: TextStyle(fontSize: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
-              actionsAlignment: .center,
+              title: const Text("Reset Progress"),
+              content: const Text(
+                "This will permanently reset all your progress.\n\nAre you sure?",
+              ),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
               actions: [
-                ElevatedButton(
+                TextButton(
                   onPressed: () => context.pop(),
-                  child: Text('No, Cancel'),
+                  child: const Text("Cancel"),
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   onPressed: () {
                     ref.read(hiveRepositoryProvider).resetGame();
                     ref.invalidate(hiveRepositoryProvider);
                     HapticFeedback.mediumImpact();
                     context.pop();
                   },
-                  child: Text('Yes, Reset Game'),
+                  child: const Text("Reset"),
                 ),
               ],
             );

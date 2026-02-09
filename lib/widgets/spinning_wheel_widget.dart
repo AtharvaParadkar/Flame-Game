@@ -13,7 +13,8 @@ class SpinningWheelWidget extends ConsumerStatefulWidget {
   const SpinningWheelWidget({super.key});
 
   @override
-  ConsumerState<SpinningWheelWidget> createState() => _SpinningWheelWidgetState();
+  ConsumerState<SpinningWheelWidget> createState() =>
+      _SpinningWheelWidgetState();
 }
 
 class _SpinningWheelWidgetState extends ConsumerState<SpinningWheelWidget> {
@@ -28,66 +29,76 @@ class _SpinningWheelWidgetState extends ConsumerState<SpinningWheelWidget> {
   @override
   Widget build(BuildContext context) {
     int? outCome;
-    return Material(
-      color: Colors.transparent,
-      shape: const CircleBorder(),
-      elevation: 6,
-      child: FortuneWheel(
-        onFling: () {
-          if (ref.read(canPlaySoundProvider)) {
-            FlameAudio.play('spin.mp3');
-          }
-          List<int> o = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-          setState(() {
-            outCome = o[Random().nextInt(o.length)];
-          });
-          selected.add(outCome!);
-        },
-        onAnimationEnd: () {
-          if (outCome == 0) {
-            // redirect to win screen
-          } else {
-            // redirect to lose screen
-          }
-        },
-        animateFirst: false,
-        hapticImpact: .heavy,
-        indicators: <FortuneIndicator>[
-          FortuneIndicator(
-            alignment: .topCenter,
-            child: TriangleIndicator(
-              color: Colors.black54,
-              height: 40,
-              width: 30,
-              elevation: 10,
-            ),
+    return Stack(
+      alignment: .center,
+      children: [
+        Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            shape: .circle,
+            boxShadow: [
+              BoxShadow(color: Colors.white.withOpacity(0.6), blurRadius: 20),
+            ],
           ),
-        ],
-        selected: selected.stream,
-        items: [
-          FortuneItem(
-            child: RotatedBox(
-              quarterTurns: 1,
-              child: Padding(
-                padding: .only(bottom: 100),
-                child: Icon(
-                  Icons.recycling_rounded,
-                  color: Colors.white,
-                  size: 55,
-                ),
+        ),
+        FortuneWheel(
+          onFling: () {
+            if (ref.read(canPlaySoundProvider)) {
+              FlameAudio.play('spin.mp3');
+            }
+            List<int> o = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            setState(() {
+              outCome = o[Random().nextInt(o.length)];
+            });
+            selected.add(outCome!);
+          },
+          onAnimationEnd: () {
+            if (outCome == 0) {
+              // redirect to win screen
+            } else {
+              // redirect to lose screen
+            }
+          },
+          animateFirst: false,
+          hapticImpact: .heavy,
+          indicators: <FortuneIndicator>[
+            FortuneIndicator(
+              alignment: .topCenter,
+              child: TriangleIndicator(
+                color: Colors.black54,
+                height: 40,
+                width: 30,
+                elevation: 10,
               ),
             ),
-            style: FortuneItemStyle(
-              color: Colors.blue.shade500.withAlpha(50),
-              borderWidth: 0,
+          ],
+          selected: selected.stream,
+          items: [
+            FortuneItem(
+              child: RotatedBox(
+                quarterTurns: 1,
+                child: Padding(
+                  padding: .only(bottom: 100),
+                  child: Icon(
+                    Icons.recycling_rounded,
+                    color: Colors.white,
+                    size: 55,
+                  ),
+                ),
+              ),
+              style: FortuneItemStyle(
+                color: Colors.blue.shade500.withAlpha(50),
+                borderWidth: 0,
+              ),
             ),
-          ),
-          ..._fItem(
-            image: "assets/images/trash.png",
-            color: Colors.white.withAlpha(150),
-          ),
-        ],
-      ),
+            ..._fItem(
+              image: "assets/images/trash.png",
+              color: Colors.white.withAlpha(150),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
